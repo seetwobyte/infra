@@ -96,12 +96,13 @@ resource "aws_route_table" "public-route" {
         Name = "main"
     }
 }
-resource "aws_route_table" "internal {
+resource "aws_route_table" "internal" {
     vpc_id = "${aws_vpc.bancroft.id}"
     route {
         cidr_block = "10.10.0.0/16"
         # need help here
-        # need help here
+        # need to create a propert internal route
+
     }}
 # route associations public
 resource "aws_route_table_association" "public" {
@@ -120,3 +121,4 @@ resource "aws_route_table_association" "internal" {
     subnet_id = "${aws_subnet.mgmt-tier-b.id}"
     route_table_id = "${aws_route_table.internal.id}"
 }
+#
