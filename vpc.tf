@@ -85,25 +85,25 @@ resource "aws_internet_gateway" "bancroft-gw" {
 }
 
 # route tables
-resource "aws_route_table" "main-public" {
-    vpc_id = "${aws_vpc.main.id}"
+resource "aws_route_table" "public-route" {
+    vpc_id = "${aws_vpc.bancroft.id}"
     route {
         cidr_block = "0.0.0.0/0"
-        gateway_id = "${aws_internet_gateway.main-gw.id}"
+        gateway_id = "${aws_internet_gateway.bancroft-gw.id}"
     }
 
     tags {
-        Name = "main-public-1"
+        Name = "main"
     }
 }
 
 # route associations public
-resource "aws_route_table_association" "main-public-1-a" {
-    subnet_id = "${aws_subnet.main-public-1.id}"
-    route_table_id = "${aws_route_table.main-public.id}"
+resource "aws_route_table_association" "public-a" {
+    subnet_id = "${aws_subnet.public-a.id}"
+    route_table_id = "${aws_route_table.XXXXXX.id}"
 }
-resource "aws_route_table_association" "main-public-2-a" {
-    subnet_id = "${aws_subnet.main-public-2.id}"
+resource "aws_route_table_association" "public-b" {
+    subnet_id = "${aws_subnet.public-b.id}"
     route_table_id = "${aws_route_table.main-public.id}"
 }
 resource "aws_route_table_association" "main-public-3-a" {
