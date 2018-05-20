@@ -1,4 +1,4 @@
-# Internet VPC
+############  Internet VPC  ##########################
 resource "aws_vpc" "bancroft" {
     cidr_block = "10.10.0.0/16"
     instance_tenancy = "default"
@@ -13,7 +13,7 @@ resource "aws_vpc" "bancroft" {
 }
 
 
-# Subnets
+#################### Subnets ###################
 resource "aws_subnet" "public-A" {
     vpc_id = "${aws_vpc.bancroft.id}"
     cidr_block = "10.0.1.0/25"
@@ -75,7 +75,7 @@ resource "aws_subnet" "mgmt-tier-b" {
     }
 }
 
-# Internet GW
+################### Internet GW   ######################
 resource "aws_internet_gateway" "bancroft-gw" {
     vpc_id = "${aws_vpc.bancroft.id}"
 
@@ -84,7 +84,7 @@ resource "aws_internet_gateway" "bancroft-gw" {
     }
 }
 
-# route tables
+##################### route tables  #############################
 resource "aws_route_table" "public-route" {
     vpc_id = "${aws_vpc.bancroft.id}"
     route {
@@ -104,7 +104,7 @@ resource "aws_route_table" "internal" {
         # need to create a propert internal route
 
     }}
-# route associations public
+############  route associations public   #######################
 resource "aws_route_table_association" "public" {
     subnet_id = "${aws_subnet.public-A.id}"
     route_table_id = "${aws_route_table.public-route.id}"
